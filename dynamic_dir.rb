@@ -4,7 +4,9 @@ require 'sinatra/reloader'
 
 get "/" do
   @title = "Dynamic Directory"
+  @wd = "public"
 
-  @dir_list = Dir.children("public")
+  @files_only = Dir.children(@wd).reject { |item| File.directory?("#{@wd}/#{item}") }
+
   erb :index
 end
